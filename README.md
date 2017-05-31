@@ -49,7 +49,7 @@ In the example above, an object of the class `Something` is created on the `heap
 Some code is executed and an exception is thrown in the middle of the program.
 According to the code before and after the `throw` instruction,
 the program may catch the exception somewhere else or simply terminates.
-The object of the class `Something` created just before on the `heap` may not deleted
+The object of the class `Something` created just before on the `heap` may not be deleted
 because the `delete` instruction may not be reached. In that case, there is a memory leak.
 
 #### The solution
@@ -110,7 +110,7 @@ int main()
 The solution is to create a new class called `RAIIClass`
 that contains a pointer to a `Something` object.
 A `RAIIClass` object is created on the `stack`
-after the `Something` object on the heap.
+after the `Something` object on the `heap`.
 
 C++ guarantees that when the execution leaves the current scope,
 every resources allocated on the `stack` are deleted
@@ -118,7 +118,7 @@ every resources allocated on the `stack` are deleted
 It happens even if an exception makes the execution leaves the scope.
 
 In the example above, the `thing` object cannot be deleted
-because it is allocated on the heap.
+because it is allocated on the `heap`.
 However, the `raii` object allocated on the `stack` is deleted.
 Its constructor is called: this constructor contains the `delete`
 instruction of the `Something` object of the heap,
@@ -143,9 +143,9 @@ and with others standard library classes.
 In general, RAII is used to ensure that some actions
 will be executed, no matter what happens during the execution
 (and even if the expected actions cannot be reached).
-Those actions can be the deletion of a `heap` resource
+Those actions can be `heap` resource deletion
 as we have just seen, but there are others cases
-like close a file, close a socket... etc...
+like closing a file, closing a socket... etc...
 
 ## Execute the example
 
